@@ -3,7 +3,6 @@
 const Station = require('../models/station')
 const Bike = require('../models/bike')
 
-//Falta fixar avialable,NA de les estacions
 function getStations(req,res){
     //Funcio per obtindre totes les estacions
 

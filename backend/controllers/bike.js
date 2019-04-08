@@ -4,7 +4,6 @@ const Station = require('../models/station')
 const Bike = require('../models/bike')
 
 
-//Falta asigna i no assigna bici a l'estacio,
 function getUnnasignedBikes(req,res) {
     //Funcio per obtindre totes les bicis sense asignar
 
@@ -59,7 +58,16 @@ function assignBikeToStation(req,res){
                                 return res.status(400).send({message: `Error al asignar la bici: ${err}. No existe ninguna estacion con ese ID`})
                             else {
                                 if (sta.nModified == 1) {
-                                    res.status(200).send(sta);
+                                    //Pasem a posar la estació com disponible (al tindre bicis)
+                                    Station.update({_id: stationId}, {state: "available"}, (err, stas) => {
+                                        if (err)
+                                            return res.status(500).send({message: `Error al alterar la estacion: ${err}`})
+                                        else if (!stas)
+                                            return res.status(400).send({message: `Error al alterar la estacion ${err}`})
+                                        else {
+                                            res.status(200).send(sta);
+                                        }
+                                    })
                                 }
                                 else{
                                     res.status(400).send(sta);
@@ -110,18 +118,17 @@ function unassignBikeToStation(req,res){
                             else if(!sta)
                                 return res.status(400).send({message: `Error al desasignar la bici: ${err}. No existe ninguna estacion con ese ID`})
                             else {
-                                res.status(200).send(sta);
-                            }
-                            //Faltaria cambiar el camp NA de la estació, pero em falta temps. La funcio seria la seguent:
-                                /*if (sta.nModified == 1) {
-                                    Station.find({_id: stationId}, {bikes: {$size: 0}}, (err, estacions) => {
+                                //res.status(200).send(sta);
+                            //}
+                            //Ara hauriem de cambiar el camp a NA de l'estacio
+                                if (sta.nModified == 1) {
+                                    Station.find({_id: stationId,bikes: {$size: 0}}, (err, estacions) => {
                                         if (err) {
                                             return res.status(500).send({message: `Error al obtener las estaciones: ${err}`})
                                         } else if (estacions.length == 0) {
                                             //Aun tiene bicis
                                             res.status(200).send(sta);
                                         } else {
-                                            console.log("Probaa")
                                             Station.update({_id: stationId}, {state: "NA"}, (err, stas) => {
                                                 if (err)
                                                     return res.status(500).send({message: `Error al alterar la estacion: ${err}`})
@@ -137,7 +144,7 @@ function unassignBikeToStation(req,res){
                                     {
                                         res.status(400).send(sta);
                                     }
-                                }*/
+                                }
                         })
                     }
                     else{
