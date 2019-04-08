@@ -12,6 +12,7 @@ const stationCtrl = require('../controllers/station')
 api.get('/getStations',stationCtrl.getStations),
 api.get('/getBikesStation/:stationId',stationCtrl.getBikesFromStation),
 api.get('/afagirMostra',stationCtrl.addSampleStation),
+api.get('/afagirMostra2',stationCtrl.addSampleStation2),
 api.get('/getUnnasignBikes',bikeCtrl.getUnnasignedBikes),
 api.get('/assignBike/:stationId/:bikeId',bikeCtrl.assignBikeToStation),
 api.get('/unassignBike/:stationId/:bikeId',bikeCtrl.unassignBikeToStation),

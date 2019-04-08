@@ -87,8 +87,49 @@ function addSampleStation(req,res){
 
 }
 
+function addSampleStation2(req,res){
+    console.log("Petició d'afagir estacio mostra2")
+
+    let bikeNew= new Bike ({name: "B2",kms:100,description: "Value",assigned:true})
+
+    Bike.find({name: bikeNew.name}).exec(function(err, bike) {
+        if(err) {
+            return res.status(500).send({message: `Error al añadir bici: ${err}`})
+        }
+        if (bike.length==0){
+            bikeNew.save((err,bikeSaved) => {
+                if(err) {
+                    return res.status(400).send({message: `Error al añadir la bici: ${err}. Ya existe una bici con ese nombre`})
+                }
+
+                var stationNew = new Station({name: "Les Corts",state:"available",description: "Value", bikes: bikeSaved._id});
+
+                Station.find(stationNew).lean().exec(function (err, station) {
+                    if (err) {
+                        return res.status(500).send({message: `Error al añadir la estacion: ${err}.`})
+                    }
+                    if (!station.length) {
+                        stationNew.save((err) => {
+                            if (err) {
+                                return res.status(400).send({message: `Error al añadir la estacion: ${err}. Ya existe una estacion con algun campo único`})
+                            }
+                            return res.status(200).send({message: stationNew})
+                        })
+                    } else {
+                        return res.status(400).send({message: `Error al añadir la estacion: ${stationNew.name}. Ya existe una estacion con ese nombre`})
+                    }
+                })
+            } ) }
+        else {
+            return res.status(400).send({message: `Error al añadir la bici: ${bikeNew.name}. Ya existe una bici con ese nombre`})
+        }
+    });
+
+}
+
 module.exports={
     getStations,
     getBikesFromStation,
     addSampleStation,
+    addSampleStation2,
 }
