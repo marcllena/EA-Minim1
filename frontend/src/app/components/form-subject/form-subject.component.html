@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!--Titol de la pestanya-->
+  <title>Añadir Subject</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<div class="limiter">
+  <div class="container-login100">
+    <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
+      <form class="login100-form validate-form">
+        <!--Titol principal-->
+        <span class="login100-form-title p-b-49">
+						Añadir Asignatura a la Base de Datos
+					</span>
+        <!--Form per emplenar els camps-->
+        <form [formGroup]="Form">
+          <div class="wrap-input100 validate-input m-b-23">
+            <span class="label-input100">Nombre de la asignatura:</span>
+            <input class="input100" type="text" style="text-indent: 40px" formControlName="name" placeholder="Escribe el nombre de la asignatura">
+            <span class="focus-input100" data-symbol="&#xf206;"></span>
+          </div>
+          <pre></pre>
+        </form>
+
+        <pre></pre>
+        <!--Lloc on mostrem els missatges d'alerta dels validadors-->
+        <!--Al toca qualsevol camp tornem a mirar els validadors, pero definim els missatges d'error al TS-->
+        <div class="validation-errors">
+          <ng-container *ngFor="let validation of validation_messages.name">
+            <div class="alert alert-danger" *ngIf="Form.get('name').hasError(validation.type) && (Form.get('name').dirty || Form.get('name').touched)">
+              {{ validation.message }}
+            </div>
+          </ng-container>
+        </div>
+
+        <!--Boto executar la funció de TS-->
+        <div class="container-login100-form-btn">
+          <div class="wrap-login100-form-btn">
+            <div class="login100-form-bgbtn"></div>
+            <button (click)="peticioForm()" [disabled]="Form.invalid" class="login100-form-btn" type="submit">
+              Realizar Petición
+            </button>
+          </div>
+        </div>
+
+        <!--Boto per anar a la ruta relativa -->
+        <pre></pre>
+        <div class="container-login100-form-btn">
+          <div class="wrap-login100-form-btn">
+            <div class="login100-form-bgbtn"></div>
+            <button  routerLink="/" class="login100-form-btn" type="submit">
+              Cancelar
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<div id="dropDownSelect1"></div>
+
+<!--===============================================================================================-->
+<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+<script src="vendor/animsition/js/animsition.min.js"></script>
+<!--===============================================================================================-->
+<script src="vendor/bootstrap/js/popper.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+<script src="vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+<script src="vendor/daterangepicker/moment.min.js"></script>
+<script src="vendor/daterangepicker/daterangepicker.js"></script>
+<!--===============================================================================================-->
+<script src="vendor/countdowntime/countdowntime.js"></script>
+<!--===============================================================================================-->
+
+</body>
+</html>

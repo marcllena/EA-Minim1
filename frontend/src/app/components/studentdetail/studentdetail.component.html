@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!--Titol de la pestanya-->
+  <title>Informació Student</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<div class="limiter">
+  <div class="container-login100">
+    <div class="wrap-login100 p-l-20 p-r-20 p-t-20 p-b-20">
+      <p></p>
+      <p></p>
+      <!--Titol principal-->
+      <span *ngIf="student" class="login100-form-title">
+						Nombre del estudiante: {{student.name}}
+					</span>
+      <p></p>
+      <p></p>
+      <pre *ngIf="student" >Identificador:   {{student._id}}   </pre>
+      <p></p>
+      <p></p>
+      <pre *ngIf="student" >Dirección:   {{student.address}}   </pre>
+      <p></p>
+      <p></p>
+      <!--Si la variable llista es diferent a Null, mostrem els titols de les columnes-->
+      <pre *ngIf="student" class="list_titles">Teléfonos:   Nombre    Numero</pre>
+      <ul *ngIf="student" id="menu">
+        <!--Per cada element de la llista fem:-->
+        <li  class="list_items" *ngFor="let phone of student.phones">
+          <pre>       {{phone.name}}     {{phone.address}}  </pre>
+        </li>
+        <li class="no-bullet">
+
+        </li>
+      </ul>
+      <!--Botons-->
+      <pre></pre>
+      <div class="container-login100-form-btn">
+        <div class="wrap-login100-form-btn">
+          <div class="login100-form-bgbtn"></div>
+          <button  (click)="botoEliminar()"  class="login100-form-btn" type="submit">
+            Eliminar este alumno de la Asignatura
+          </button>
+        </div>
+      </div>
+      <p></p>
+      <p></p>
+      <div class="container-login100-form-btn">
+        <div class="wrap-login100-form-btn">
+          <div class="login100-form-bgbtn"></div>
+          <button  routerLink="/api/subject" class="login100-form-btn" type="submit">
+            Volver atrás
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <!--===============================================================================================-->
+  <script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+  <!--===============================================================================================-->
+  <script src="vendor/animsition/js/animsition.min.js"></script>
+  <!--===============================================================================================-->
+  <script src="vendor/bootstrap/js/popper.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+  <!--===============================================================================================-->
+  <script src="vendor/select2/select2.min.js"></script>
+  <!--===============================================================================================-->
+  <script src="vendor/daterangepicker/moment.min.js"></script>
+  <script src="vendor/daterangepicker/daterangepicker.js"></script>
+  <!--===============================================================================================-->
+  <script src="vendor/countdowntime/countdowntime.js"></script>
+  <!--===============================================================================================-->
+</div>
+</body>
+</html>
+
+

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!--Titol de la pestanya-->
+  <title>Form</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<div class="limiter">
+  <div class="container-login100">
+    <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
+      <form class="login100-form validate-form">
+        <!--Titol principal-->
+        <span class="login100-form-title-small p-b-49">
+						Añadir Nuevo Objeto a través del Form
+					</span>
+        <!--Form per emplenar els camps-->
+        <form [formGroup]="Form">
+          <div class="wrap-input100 validate-input m-b-23">
+            <span class="label-input100">Campo1:</span>
+            <input class="input100" type="text" style="text-indent: 40px" formControlName="campo1_name" placeholder="Escribe el Campo1">
+            <span class="focus-input100" data-symbol="&#xf206;"></span>
+          </div>
+          <div class="wrap-input100 validate-input m-b-23">
+            <span class="label-input100">Campo2:</span>
+            <input class="input100" type="text" style="text-indent: 40px" formControlName="campo2_name" placeholder="Escribe el Campo2">
+            <span class="focus-input100" data-symbol="&#xf206;"></span>
+          </div>
+          <div class="wrap-input100 validate-input m-b-23">
+            <span class="label-input100">Campo3:</span>
+            <input class="input100" type="text" style="text-indent: 40px" formControlName="campo3_name" placeholder="Escribe el Campo3">
+            <span class="focus-input100" data-symbol="&#xf206;"></span>
+          </div>
+          <div class="wrap-input100 validate-input m-b-23">
+            <span class="label-input100">Campo4:</span>
+            <input class="input100" type="text" style="text-indent: 40px" formControlName="campo4_name" placeholder="Escribe el Campo4">
+            <span class="focus-input100" data-symbol="&#xf206;"></span>
+          </div>
+          <pre></pre>
+        </form>
+
+        <pre></pre>
+        <!--Lloc on mostrem els missatges d'alerta dels validadors-->
+        <!--Al toca qualsevol camp tornem a mirar els validadors, pero definim els missatges d'error al TS-->
+        <div class="validation-errors">
+          <ng-container *ngFor="let validation of validation_messages.campo1_name">
+            <div class="alert alert-danger" *ngIf="Form.get('campo1_name').hasError(validation.type) && (Form.get('campo1_name').dirty || Form.get('campo1_name').touched)">
+              {{ validation.message }}
+            </div>
+          </ng-container>
+          <ng-container *ngFor="let validation of validation_messages.campo2_name">
+            <div class="alert alert-danger" *ngIf="Form.get('campo2_name').hasError(validation.type) && (Form.get('campo2_name').dirty || Form.get('campo2_name').touched)">
+              {{ validation.message }}
+            </div>
+          </ng-container>
+          <ng-container *ngFor="let validation of validation_messages.campo3_name">
+            <div class="alert alert-danger" *ngIf="Form.get('campo3_name').hasError(validation.type) && (Form.get('campo3_name').dirty || Form.get('campo3_name').touched)">
+              {{ validation.message }}
+            </div>
+          </ng-container>
+          <ng-container *ngFor="let validation of validation_messages.campo4_name">
+            <div class="alert alert-danger" *ngIf="Form.get('campo4_name').hasError(validation.type) && (Form.get('campo4_name').dirty || Form.get('campo4_name').touched)">
+              {{ validation.message }}
+            </div>
+          </ng-container>
+        </div>
+
+        <!--Boto executar la funció de TS-->
+        <div class="container-login100-form-btn">
+          <div class="wrap-login100-form-btn">
+            <div class="login100-form-bgbtn"></div>
+            <button (click)="botoFuncio1()" [disabled]="Form.invalid" class="login100-form-btn" type="submit">
+              Funcio1
+            </button>
+          </div>
+        </div>
+
+        <!--Boto per anar a la ruta relativa -->
+        <pre></pre>
+        <div class="container-login100-form-btn">
+          <div class="wrap-login100-form-btn">
+            <div class="login100-form-bgbtn"></div>
+            <button  routerLink="/api/subject" class="login100-form-btn" type="submit">
+              Cancelar
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<div id="dropDownSelect1"></div>
+
+<!--===============================================================================================-->
+<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+<script src="vendor/animsition/js/animsition.min.js"></script>
+<!--===============================================================================================-->
+<script src="vendor/bootstrap/js/popper.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+<script src="vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+<script src="vendor/daterangepicker/moment.min.js"></script>
+<script src="vendor/daterangepicker/daterangepicker.js"></script>
+<!--===============================================================================================-->
+<script src="vendor/countdowntime/countdowntime.js"></script>
+<!--===============================================================================================-->
+
+</body>
+</html>
+
