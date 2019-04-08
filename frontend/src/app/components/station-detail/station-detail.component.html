@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <!--Titol de la pestanya-->
-  <title>Informació Subject</title>
+  <title>Bicis de l'Estació</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
@@ -13,23 +13,46 @@
       <p></p>
       <p></p>
       <!--Titol principal-->
-      <span *ngIf="subject" class="login100-form-title">
-						Nombre de la asignatura: {{subject.name}}
+      <span class="login100-form-title">
+						{{stationName}} Current Bikes:
 					</span>
       <p></p>
       <p></p>
       <p></p>
       <p></p>
-      <pre *ngIf="subject" class="list_titles">Identificador de la asignatura: {{subject._id}}</pre>
       <!--Si la variable llista es diferent a Null, mostrem els titols de les columnes-->
-      <pre *ngIf="subject.students.length!=0" class="list_titles">Identificador del Estudiante</pre>
-      <pre *ngIf="subject.students.length==0" class="list_titles">No hay alumnos en esta asignatura</pre>
-      <ul *ngIf="subject.students" id="menu">
+      <pre *ngIf="bikesStation.length!=0" class="list_titles">Bike    Kms   Description </pre>
+      <pre *ngIf="bikesStation.length==0" class="list_titles">No hay bicis asignadas a esta Estacion</pre>
+      <ul *ngIf="bikesStation" id="menu">
         <!--Per cada element de la llista fem:-->
-        <li  class="list_items" *ngFor="let student of subject.students">
+        <li  class="list_items" *ngFor="let bike of bikesStation.bikes">
           <!--Mostrem el nom per cada element-->
-          <pre>{{student}} </pre>
-          <button type="button" (click)="botoLlista(student)" class="list_btn1 pull-right" id="btnEliminar">Obtener información</button>
+          <pre>{{bike.name}}  {{bike.kms}}  {{bike.description}}</pre>
+          <button type="button" (click)="botoDesAsignar(bike._id)" class="list_btn1 pull-right" id="btnEliminar">Desasignar de la Estacion</button>
+        </li>
+        <li class="no-bullet">
+
+        </li>
+      </ul>
+      <p></p>
+      <p></p>
+      <p></p>
+      <span class="login100-form-title">
+						Bicis sin asignar:
+					</span>
+      <p></p>
+      <p></p>
+      <p></p>
+      <p></p>
+      <!--Si la variable llista es diferent a Null, mostrem els titols de les columnes-->
+      <pre *ngIf="unnasignedBikes!=0" class="list_titles">Bike    Kms   Description </pre>
+      <pre *ngIf="unnasignedBikes==0" class="list_titles">No hay bicis sin asignar</pre>
+      <ul *ngIf="unnasignedBikes!=0" id="menu2">
+        <!--Per cada element de la llista fem:-->
+        <li  class="list_items" *ngFor="let bike of unnasignedBikes">
+          <!--Mostrem el nom per cada element-->
+          <pre>{{bike.name}}  {{bike.kms}}  {{bike.description}}</pre>
+          <button type="button" (click)="botoAsignar(bike._id)" class="list_btn2 pull-right" id="btnAsignar">Asignar de la Estacion</button>
         </li>
         <li class="no-bullet">
 
@@ -39,24 +62,6 @@
       <p></p>
       <p></p>
       <pre></pre>
-      <div class="container-login100-form-btn">
-        <div class="wrap-login100-form-btn">
-          <div class="login100-form-bgbtn"></div>
-          <button  (click)="botoAfagirId()" class="login100-form-btn" type="submit">
-            Añadir Alumno Existente (mediante su ID) a esta asignatura
-          </button>
-        </div>
-      </div>
-      <p></p>
-      <p></p>
-      <div class="container-login100-form-btn">
-        <div class="wrap-login100-form-btn">
-          <div class="login100-form-bgbtn"></div>
-          <button  (click)="botoAfagir()" class="login100-form-btn" type="submit">
-            Añadir Alumno Nuevo a esta asignatura
-          </button>
-        </div>
-      </div>
       <p></p>
       <p></p>
       <div class="container-login100-form-btn">
@@ -88,5 +93,6 @@
 </div>
 </body>
 </html>
+
 
 

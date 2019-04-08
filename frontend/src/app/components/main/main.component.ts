@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SubjectServices } from "../../services/subject.services";
+import { StationServices } from "../../services/station.services";
 import {Router} from "@angular/router";
 import {DataService} from "../../services/data.services";
 
@@ -18,15 +18,15 @@ export class MainComponent implements OnInit {
   llista: Object;
 
   //Com a constructor, pasem els Services (on estaran implementades les funcions), el servei de Dades (per passar dades entre components) i el Router
-  constructor(private subjectService: SubjectServices,private dataService:DataService, private router: Router) { }
+  constructor(private stationService: StationServices,private dataService:DataService, private router: Router) { }
 
   ngOnInit() {
-    this.llistaSubjects();
+    this.llistaStations();
   }
 
-  llistaSubjects() {
-    console.log("Operació de demanar usuaris realitzada al BackEnd:");
-    this.subjectService.obtainSubjects()
+  llistaStations() {
+    console.log("Operació de demanar estacions realitzada al BackEnd:");
+    this.stationService.obtainStations()
       .subscribe(response => {
           console.log("Resposta del BackEnd"+response.body);
           //Podem filtrar per tots els codis 2XX
@@ -42,9 +42,9 @@ export class MainComponent implements OnInit {
           console.log("Error del BackEnd"+err);
           //Podem filtrar per tots els altres codis
           if(err.status==400){
-            console.log("No hi han assignatures")
+            console.log("No hi han estacions")
             this.llista=null;
-            M.toast({html: 'No hay asignaturas en la base de datos.'});
+            M.toast({html: 'No hay estaciones en la base de datos.'});
           }
           else {
             //Error desconegut
@@ -52,41 +52,9 @@ export class MainComponent implements OnInit {
           }
         });
   }
-  botoLlista(id) {
-    this.dataService.changeSubjectId(id);
-    this.router.navigateByUrl("/api/subject");
-  }
-  botoLlista2(id) {
-    console.log("Operació d'eliminar l'assignatura amb Id:"+id);
-    this.subjectService.deleteSubject(id)
-      .subscribe(response => {
-          console.log("Resposta del BackEnd"+response.body);
-          //Podem filtrar per tots els codis 2XX
-          if(response.status==204){
-            M.toast({html: 'Asignatura Eliminada'});
-            this.llistaSubjects();
-          }
-          else if(response.status==200){
-            M.toast({html: 'Antes de eliminar la asignatura, elimina todos sus alumnos'});
-          }
-          else {
-            //Error desconegut
-            console.log("Error");
-          }
-        },
-        err => {
-          console.log("Error del BackEnd"+err);
-          //Podem filtrar per tots els altres codis
-          if(err.status==400){
-            console.log("Error")
-          }
-          else {
-            //Error desconegut
-            console.log("Error");
-          }
-        });
-  }
-  afagirSubject(){
-    this.router.navigateByUrl("/api/formSubject");
+  botoLlista(id,name) {
+    this.dataService.changeStationId(id);
+    this.dataService.changeStationName(name);
+    this.router.navigateByUrl("/api/station");
   }
 }

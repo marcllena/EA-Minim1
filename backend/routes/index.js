@@ -6,21 +6,15 @@ que es on estan implementades
  */
 const express = require('express')
 const api = express.Router()
-const subjectCtrl = require('../controllers/subject')
-const studentCtrl = require('../controllers/student')
+const bikeCtrl = require('../controllers/bike')
+const stationCtrl = require('../controllers/station')
 
-api.get('/getSubjects',subjectCtrl.getSubjects),
-api.get('/getSubject/:subjectId',subjectCtrl.getSubject),
-api.get('/addStudentSubject/:subjectId/:studentId',subjectCtrl.addStudentToSubject),
-api.get('/removeStudentSubject/:subjectId/:studentId',subjectCtrl.deleteStudentToSubject),
-api.post('/addSubject',subjectCtrl.addSubject)
-api.get('/afagirMostra',subjectCtrl.addSampleSubject)
-api.get('/deleteSubject/:subjectId',subjectCtrl.deleteSubject),
-api.post('/addStudent/:subjectId',studentCtrl.addStudent)
-api.get('/getStudent/:studentId',studentCtrl.getStudent)
-api.get('/obtainSubjectsOfStudent/:studentId',studentCtrl.obtainSubjectsOfStudent),
-
-//Hauriem de utilitzar els put (per actualitzar) i els delete
+api.get('/getStations',stationCtrl.getStations),
+api.get('/getBikesStation/:stationId',stationCtrl.getBikesFromStation),
+api.get('/afagirMostra',stationCtrl.addSampleStation),
+api.get('/getUnnasignBikes',bikeCtrl.getUnnasignedBikes),
+api.get('/assignBike/:stationId/:bikeId',bikeCtrl.assignBikeToStation),
+api.get('/unassignBike/:stationId/:bikeId',bikeCtrl.unassignBikeToStation),
 
 
 module.exports =  api

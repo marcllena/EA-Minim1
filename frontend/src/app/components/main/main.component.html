@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <!--Titol de la pestanya-->
-  <title>Lista de Subjects</title>
+  <title>Lista de Estaciones</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
@@ -14,7 +14,7 @@
       <p></p>
       <!--Titol principal-->
       <span class="login100-form-title">
-						Lista de Subjects
+						Lista de Estaciones
 					</span>
       <p></p>
       <p></p>
@@ -22,35 +22,26 @@
       <div class="container-login100-form-btn">
         <div class="wrap-login100-form-btn">
           <div class="login100-form-bgbtn"></div>
-          <button (click)="llistaSubjects()" class="login100-form-btn" type="submit">
-            Obtener Subjects
+          <button (click)="llistaStations()" class="login100-form-btn" type="submit">
+            Obtener Estaciones
           </button>
         </div>
       </div>
       <p></p>
       <p></p>
       <!--Si la variable llista es diferent a Null, mostrem els titols de les columnes-->
-      <pre *ngIf="llista" class="list_titles">Nombre de la Asignatura</pre>
+      <pre *ngIf="llista" class="list_titles">Nombre      Estado      Descripción</pre>
       <ul *ngIf="llista" id="menu">
         <!--Per cada element de la llista fem:-->
         <li  class="list_items" *ngFor="let element of llista">
           <!--Mostrem tres camps de cada element-->
-          <pre>{{element.name}}     </pre>
+          <pre>{{element.name}} {{element.state}} {{element.description}}</pre>
           <!--A més afagim dos botons per realitzar accions relacionat amb els elements de la llista-->
-          <button *ngIf="llista" type="button" (click)="botoLlista2(element._id)" class="list_btn2 pull-right" id="btnEliminar"> Eliminar Asignatura</button>
-          <button *ngIf="llista" type="button" (click)="botoLlista(element._id)" class="list_btn1 pull-right" id="btnInfo"> Obtener información</button>
+          <button *ngIf="llista" type="button" (click)="botoLlista(element._id, element.name)" class="list_btn2 pull-right" id="btnEliminar"> Ver información</button>
         </li>
         <li class="no-bullet">
         </li>
       </ul>
-      <div class="container-login100-form-btn">
-        <div class="wrap-login100-form-btn">
-          <div class="login100-form-bgbtn"></div>
-          <button (click)="afagirSubject()" class="login100-form-btn" type="submit">
-            Añadir Subject
-          </button>
-        </div>
-      </div>
     </div>
   </div>
 
